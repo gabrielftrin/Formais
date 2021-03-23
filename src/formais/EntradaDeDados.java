@@ -12,7 +12,7 @@ public class EntradaDeDados {
 
 	private String caminhoBase = "C:\\Users\\mrgab\\Google Drive\\5-Formais\\";
 	private String nomeArquivoEntradaDados = caminhoBase.concat("entradas_ab.txt");
-	private String nomeArquivoAutomato;
+	private String nomeArquivoAutomato= "";
 
 	private String nomeArquivoResultadoAutomato;
 
@@ -47,7 +47,14 @@ public class EntradaDeDados {
 		this.caminhoBase = caminhoBase;
 		this.nomeArquivoResultadoAutomato = caminhoBase + "results" + nomeArquivoAutomato + ".jff.txt";
 	}
-	
+
+	/**
+	 * 
+	 */
+	public EntradaDeDados() {
+
+	}
+
 	/**
 	 * @param expressaoRegular
 	 * @param nomeArquivoAutomato
@@ -247,7 +254,7 @@ public class EntradaDeDados {
 		}
 
 	}
-	
+
 	public void imprimirPalavrasAceitasExpressao() {
 		imprimir("Palavras aceitas pela expressão: " + getListaPalavrasAceitasExpressao().size());
 	}
@@ -255,7 +262,7 @@ public class EntradaDeDados {
 	public void imprimirPalavrasAceitasAutomato() {
 		imprimir("Palavras aceitas pelo automato: " + getListaPalavrasAceitasAutomato().size());
 	}
-	
+
 	public void processar() {
 		lerEntradas();
 		verificarPalavrasAceitasExpressao();
@@ -265,5 +272,21 @@ public class EntradaDeDados {
 		verificarPalavrasAceitasAutomato();
 		imprimirPalavrasAceitasAutomato();
 
+	}
+
+	/**
+	 * TODO Falta implementar corretamente
+	 * @return
+	 */
+	public String lerTexto() {
+
+		Scanner scanner = new Scanner(System.in);
+		String retornoDaLeitura = "";
+		if (scanner.hasNext()) {
+			retornoDaLeitura = scanner.nextLine();
+		}
+		
+		scanner.close();
+		return retornoDaLeitura;
 	}
 }

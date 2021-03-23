@@ -47,6 +47,16 @@ public class EntradaDeDados {
 		this.caminhoBase = caminhoBase;
 		this.nomeArquivoResultadoAutomato = caminhoBase + "results" + nomeArquivoAutomato + ".jff.txt";
 	}
+	
+	/**
+	 * @param expressaoRegular
+	 * @param nomeArquivoAutomato
+	 */
+	public EntradaDeDados(String expressaoRegular, String nomeArquivoAutomato) {
+		this.expressaoRegular = expressaoRegular;
+		this.nomeArquivoAutomato = caminhoBase + nomeArquivoAutomato;
+		this.nomeArquivoResultadoAutomato = caminhoBase + "results" + nomeArquivoAutomato + ".jff.txt";
+	}
 
 	/**
 	 * @return the expressaoRegular
@@ -217,4 +227,43 @@ public class EntradaDeDados {
 		this.listaPalavrasAceitasAutomato = listaPalavrasAceitasAutomato;
 	}
 
+	public void verificarPalavrasAceitasExpressao() {
+
+		for (int i = 0; i < getListaPalavrasLidasExpressao().size(); i++) {
+
+			if (getListaPalavrasLidasExpressao().get(i).matches(getExpressaoRegular())) {
+				getListaPalavrasAceitasExpressao().add(getListaPalavrasLidasExpressao().get(i));
+			}
+		}
+
+	}
+
+	public void verificarPalavrasAceitasAutomato() {
+
+		for (int i = 0; i < getListaPalavrasResultadoAutomato().size(); i++) {
+			if (getListaPalavrasResultadoAutomato().get(i).contains(getTipoResultado())) {
+				getListaPalavrasAceitasAutomato().add(getListaPalavrasResultadoAutomato().get(i));
+			}
+		}
+
+	}
+	
+	public void imprimirPalavrasAceitasExpressao() {
+		imprimir("Palavras aceitas pela expressão: " + getListaPalavrasAceitasExpressao().size());
+	}
+
+	public void imprimirPalavrasAceitasAutomato() {
+		imprimir("Palavras aceitas pelo automato: " + getListaPalavrasAceitasAutomato().size());
+	}
+	
+	public void processar() {
+		lerEntradas();
+		verificarPalavrasAceitasExpressao();
+		imprimirPalavrasAceitasExpressao();
+
+		lerResultados();
+		verificarPalavrasAceitasAutomato();
+		imprimirPalavrasAceitasAutomato();
+
+	}
 }

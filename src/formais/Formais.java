@@ -47,8 +47,7 @@ public class Formais {
 		// dados.preencherListaDePalavrasPossiveis("a","b");
 
 		// EntradaDeDados.imprimir(metodo(0, 0, 0, "a"));
-
-		// resultado
+ 
 
 	}
 

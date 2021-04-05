@@ -11,26 +11,12 @@ public class EntradaDeDados {
 	private String expressaoRegular;
 
 	private String caminhoBase = "C:\\Users\\mrgab\\Google Drive\\5-Formais\\";
-	private String nomeArquivoEntradaDados = caminhoBase.concat("entradas_ab.txt");
-	private String nomeArquivoAutomato= "";
+	private String nomeArquivoEntradaDados = caminhoBase.concat("entradas_cbs.txt");
+	private String nomeArquivoAutomato = "";
 
 	private String nomeArquivoResultadoAutomato;
 
-	/**
-	 * @return the caminhoBase
-	 */
-	public String getCaminhoBase() {
-		return caminhoBase;
-	}
-
-	/**
-	 * @param caminhoBase the caminhoBase to set
-	 */
-	public void setCaminhoBase(String caminhoBase) {
-		this.caminhoBase = caminhoBase;
-	}
-
-	private String tipoResultado = " Accept";
+	private String tipoResultado = "  Result: Accept ";
 
 	private List<String> listaPalavrasAceitasExpressao = new ArrayList<>();
 	private List<String> listaPalavrasLidasExpressao = new ArrayList<>();
@@ -66,6 +52,20 @@ public class EntradaDeDados {
 	}
 
 	/**
+	 * @return the caminhoBase
+	 */
+	public String getCaminhoBase() {
+		return caminhoBase;
+	}
+
+	/**
+	 * @param caminhoBase the caminhoBase to set
+	 */
+	public void setCaminhoBase(String caminhoBase) {
+		this.caminhoBase = caminhoBase;
+	}
+
+	/**
 	 * @return the expressaoRegular
 	 */
 	public String getExpressaoRegular() {
@@ -90,7 +90,7 @@ public class EntradaDeDados {
 	 * @param nomeArquivoEntradaDados the nomeArquivoEntradaDados to set
 	 */
 	public void setNomeArquivoEntradaDados(String nomeArquivoEntradaDados) {
-		this.nomeArquivoEntradaDados = nomeArquivoEntradaDados;
+		this.nomeArquivoEntradaDados = caminhoBase.concat(nomeArquivoEntradaDados);
 	}
 
 	/**
@@ -135,7 +135,7 @@ public class EntradaDeDados {
 		this.tipoResultado = tipoResultado;
 	}
 
-	public void imprimir(Object object) {
+	public static void imprimir(Object object) {
 		System.out.println(object);
 	}
 
@@ -276,6 +276,7 @@ public class EntradaDeDados {
 
 	/**
 	 * TODO Falta implementar corretamente
+	 * 
 	 * @return
 	 */
 	public String lerTexto() {
@@ -285,8 +286,20 @@ public class EntradaDeDados {
 		if (scanner.hasNext()) {
 			retornoDaLeitura = scanner.nextLine();
 		}
-		
+
 		scanner.close();
 		return retornoDaLeitura;
+	}
+
+	/**
+	 *  
+	 * 
+	 */
+	public void gerarArquivoComPalavras(String... param) {
+
+		if (param != null) {
+
+		}
+
 	}
 }

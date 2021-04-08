@@ -11,8 +11,8 @@ public class ProgramaPrincipal {
 	}
 
 	public static void main(String[] args) {
-
-		System.out.println(Automato.gerarAutomatoQtdIguais(0).getQuantidadeEstados());
-
+ 
+			System.out.println( Automato.gerarAutomatoQtdIguais(1).getQuantidadeEstados());
+			 
 	}
 }

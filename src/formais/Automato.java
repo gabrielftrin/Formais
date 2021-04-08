@@ -49,7 +49,16 @@ public class Automato {
 			return 0;
 		}
 
-		return n + pontoMedio(n - 1);
+		int aux = 0;
+
+		for (int i = 0; i < n; i++) {
+
+			aux = aux + i + 1;
+
+		}
+
+		return aux;
+
 	}
 
 	public static Automato gerarAutomatoQtdIguais(int n) {
@@ -60,29 +69,12 @@ public class Automato {
 
 		int totalEstados = 0;
 
-		if (n < 3) {
-			switch (n) {
-			case 0:
-				totalEstados = 1;
-
-				break;
-			case 1:
-				totalEstados = 1;
-
-				break;
-			case 2:
-				totalEstados = 1;
-
-				break;
-
-			default:
-				break;
-			}
-			return new Automato(totalEstados);
-		}
-
 		int pontoMedio = pontoMedio(n); // Amarelo
 		int maiorNumero = pontoMedio + n - 2; // Laranja
+
+		if (n < 3) {
+			maiorNumero = 0;
+		}
 
 		for (int i = 0; i < n + 1; i++) {
 

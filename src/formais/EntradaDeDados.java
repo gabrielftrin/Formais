@@ -6,63 +6,44 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * @author mrgab
+ *
+ */
 public class EntradaDeDados {
 
 	private String expressaoRegular;
 
-	private String caminhoBase = "C:\\Users\\mrgab\\Google Drive\\5-Formais\\";
-	private String nomeArquivoEntradaDados = caminhoBase.concat("entradas_cbs.txt");
-	private String nomeArquivoAutomato = "";
-
+	private String caminhoBase;
+	private String nomeArquivoEntradaDados;
+	private String nomeArquivoAutomato;
 	private String nomeArquivoResultadoAutomato;
 
 	private String tipoResultado = "  Result: Accept ";
 
-	private List<String> listaPalavrasAceitasExpressao = new ArrayList<>();
 	private List<String> listaPalavrasLidasExpressao = new ArrayList<>();
+	private List<String> listaPalavrasAceitasExpressao = new ArrayList<>();
+
 	private List<String> listaPalavrasResultadoAutomato = new ArrayList<>();
 	private List<String> listaPalavrasAceitasAutomato = new ArrayList<>();
 
 	/**
 	 * @param expressaoRegular
-	 * @param nomeArquivoAutomato
+	 * @param nomeArquivoAutomato     deve ser informado no formato "automato1.jff"
+	 *                                (com a extensão)
+	 * @param caminhoBase             deve ser informado no formato "C:\\Users\\"
+	 * @param nomeArquivoEntradaDados deve ser informado no formato
+	 *                                "entradas_ab.txt"
 	 */
-	public EntradaDeDados(String expressaoRegular, String nomeArquivoAutomato, String caminhoBase) {
+	public EntradaDeDados(String expressaoRegular, String caminhoBase, String nomeArquivoEntradaDados,
+			String nomeArquivoAutomato, String nomeArquivoResultadoAutomato) {
+
 		this.expressaoRegular = expressaoRegular;
-		this.nomeArquivoAutomato = caminhoBase + nomeArquivoAutomato;
+
 		this.caminhoBase = caminhoBase;
-		this.nomeArquivoResultadoAutomato = caminhoBase + "results" + nomeArquivoAutomato + ".jff.txt";
-	}
-
-	/**
-	 * 
-	 */
-	public EntradaDeDados() {
-
-	}
-
-	/**
-	 * @param expressaoRegular
-	 * @param nomeArquivoAutomato
-	 */
-	public EntradaDeDados(String expressaoRegular, String nomeArquivoAutomato) {
-		this.expressaoRegular = expressaoRegular;
-		this.nomeArquivoAutomato = caminhoBase + nomeArquivoAutomato;
-		this.nomeArquivoResultadoAutomato = caminhoBase + "results" + nomeArquivoAutomato + ".jff.txt";
-	}
-
-	/**
-	 * @return the caminhoBase
-	 */
-	public String getCaminhoBase() {
-		return caminhoBase;
-	}
-
-	/**
-	 * @param caminhoBase the caminhoBase to set
-	 */
-	public void setCaminhoBase(String caminhoBase) {
-		this.caminhoBase = caminhoBase;
+		this.nomeArquivoEntradaDados = caminhoBase + nomeArquivoEntradaDados;
+		this.nomeArquivoAutomato = nomeArquivoAutomato;
+		this.nomeArquivoResultadoAutomato = caminhoBase + "results" + nomeArquivoAutomato + ".txt";
 	}
 
 	/**
@@ -80,6 +61,23 @@ public class EntradaDeDados {
 	}
 
 	/**
+	 * @return the caminhoBase
+	 */
+	public String getCaminhoBase() {
+		return caminhoBase;
+	}
+
+	/**
+	 * @param caminhoBase the caminhoBase to set
+	 */
+	public void setCaminhoBase(String caminhoBase) {
+		this.caminhoBase = caminhoBase;
+		setNomeArquivoAutomato(getNomeArquivoAutomato());
+		setNomeArquivoEntradaDados(getNomeArquivoEntradaDados());
+		setNomeArquivoAutomato(getNomeArquivoAutomato());
+	}
+
+	/**
 	 * @return the nomeArquivoEntradaDados
 	 */
 	public String getNomeArquivoEntradaDados() {
@@ -90,7 +88,7 @@ public class EntradaDeDados {
 	 * @param nomeArquivoEntradaDados the nomeArquivoEntradaDados to set
 	 */
 	public void setNomeArquivoEntradaDados(String nomeArquivoEntradaDados) {
-		this.nomeArquivoEntradaDados = caminhoBase.concat(nomeArquivoEntradaDados);
+		this.nomeArquivoEntradaDados = caminhoBase + nomeArquivoEntradaDados;
 	}
 
 	/**
@@ -116,9 +114,11 @@ public class EntradaDeDados {
 
 	/**
 	 * @param nomeArquivoResultadoAutomato the nomeArquivoResultadoAutomato to set
+	 *                                     informe apenas o nome do arquivo, sem o
+	 *                                     caminho
 	 */
 	public void setNomeArquivoResultadoAutomato(String nomeArquivoResultadoAutomato) {
-		this.nomeArquivoResultadoAutomato = nomeArquivoResultadoAutomato;
+		this.nomeArquivoResultadoAutomato = caminhoBase + nomeArquivoResultadoAutomato;
 	}
 
 	/**
@@ -129,53 +129,25 @@ public class EntradaDeDados {
 	}
 
 	/**
-	 * @param tipoResultado the tipoResultado to set
+	 * @param tipoResultado the tipoResultado to set define qual string deve conter
+	 *                      na linha para ela ser considerada para entrar na lista
 	 */
 	public void setTipoResultado(String tipoResultado) {
 		this.tipoResultado = tipoResultado;
 	}
 
-	public static void imprimir(Object object) {
-		System.out.println(object);
+	/**
+	 * @return the listaPalavrasLida
+	 */
+	public List<String> getListaPalavrasLidasExpressao() {
+		return listaPalavrasLidasExpressao;
 	}
 
-	public void imprimirNaLinha(Object object) {
-		System.out.print(object);
-
-	}
-
-	public void lerResultados() {
-
-		List<String> linhas = new ArrayList<>();
-
-		try {
-			Scanner sc = new Scanner(new File(this.nomeArquivoResultadoAutomato));
-			while (sc.hasNext()) {
-				linhas.add(sc.nextLine());
-			}
-			sc.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		this.listaPalavrasResultadoAutomato = linhas;
-	}
-
-	public void lerEntradas() {
-
-		List<String> linhas = new ArrayList<>();
-
-		try {
-			Scanner sc = new Scanner(new File(this.nomeArquivoEntradaDados));
-			while (sc.hasNext()) {
-				linhas.add(sc.nextLine());
-			}
-			sc.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		this.listaPalavrasLidasExpressao = linhas;
+	/**
+	 * @param listaPalavrasLida the listaPalavrasLida to set
+	 */
+	public void setListaPalavrasLidasExpressao(List<String> listaPalavrasLida) {
+		this.listaPalavrasLidasExpressao = listaPalavrasLida;
 	}
 
 	/**
@@ -193,20 +165,6 @@ public class EntradaDeDados {
 	}
 
 	/**
-	 * @return the listaPalavrasLida
-	 */
-	public List<String> getListaPalavrasLidasExpressao() {
-		return listaPalavrasLidasExpressao;
-	}
-
-	/**
-	 * @param listaPalavrasLida the listaPalavrasLida to set
-	 */
-	public void setListaPalavrasLidas(List<String> listaPalavrasLida) {
-		this.listaPalavrasLidasExpressao = listaPalavrasLida;
-	}
-
-	/**
 	 * @return the listaPalavrasResultado
 	 */
 	public List<String> getListaPalavrasResultadoAutomato() {
@@ -216,7 +174,7 @@ public class EntradaDeDados {
 	/**
 	 * @param listaPalavrasResultado the listaPalavrasResultado to set
 	 */
-	public void setListaPalavrasResultado(List<String> listaPalavrasResultado) {
+	public void setListaPalavrasResultadoAutomato(List<String> listaPalavrasResultado) {
 		this.listaPalavrasResultadoAutomato = listaPalavrasResultado;
 	}
 
@@ -234,10 +192,43 @@ public class EntradaDeDados {
 		this.listaPalavrasAceitasAutomato = listaPalavrasAceitasAutomato;
 	}
 
+	public void lerResultadosDoAutomato() {
+
+		List<String> linhas = new ArrayList<>();
+
+		try {
+			Scanner sc = new Scanner(new File(this.nomeArquivoResultadoAutomato));
+			while (sc.hasNext()) {
+				linhas.add(sc.nextLine());
+			}
+			sc.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		this.listaPalavrasResultadoAutomato = linhas;
+	}
+
+	public void lerArquivoDeEntradaDeDados() {
+
+		List<String> linhas = new ArrayList<>();
+
+		try {
+			Scanner sc = new Scanner(new File(this.nomeArquivoEntradaDados));
+			while (sc.hasNext()) {
+				linhas.add(sc.nextLine());
+			}
+			sc.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		this.listaPalavrasLidasExpressao = linhas;
+	}
+
 	public void verificarPalavrasAceitasExpressao() {
 
 		for (int i = 0; i < getListaPalavrasLidasExpressao().size(); i++) {
-
 			if (getListaPalavrasLidasExpressao().get(i).matches(getExpressaoRegular())) {
 				getListaPalavrasAceitasExpressao().add(getListaPalavrasLidasExpressao().get(i));
 			}
@@ -256,43 +247,27 @@ public class EntradaDeDados {
 	}
 
 	public void imprimirPalavrasAceitasExpressao() {
-		imprimir("Palavras aceitas pela expressão: " + getListaPalavrasAceitasExpressao().size());
+		System.out.println(("Palavras aceitas pela expressão: " + getListaPalavrasAceitasExpressao().size()));
 	}
 
 	public void imprimirPalavrasAceitasAutomato() {
-		imprimir("Palavras aceitas pelo automato: " + getListaPalavrasAceitasAutomato().size());
+		System.out.println(("Palavras aceitas pelo automato: " + getListaPalavrasAceitasAutomato().size()));
 	}
 
 	public void processar() {
-		lerEntradas();
+		lerArquivoDeEntradaDeDados();
 		verificarPalavrasAceitasExpressao();
 		imprimirPalavrasAceitasExpressao();
 
-		lerResultados();
+		lerResultadosDoAutomato();
 		verificarPalavrasAceitasAutomato();
 		imprimirPalavrasAceitasAutomato();
 
 	}
 
 	/**
-	 * TODO Falta implementar corretamente
+	 * TODO Falta implementar
 	 * 
-	 * @return
-	 */
-	public String lerTexto() {
-
-		Scanner scanner = new Scanner(System.in);
-		String retornoDaLeitura = "";
-		if (scanner.hasNext()) {
-			retornoDaLeitura = scanner.nextLine();
-		}
-
-		scanner.close();
-		return retornoDaLeitura;
-	}
-
-	/**
-	 *  
 	 * 
 	 */
 	public void gerarArquivoComPalavras(String... param) {

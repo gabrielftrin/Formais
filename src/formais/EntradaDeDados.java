@@ -19,13 +19,13 @@ public class EntradaDeDados {
 	private String nomeArquivoAutomato;
 	private String nomeArquivoResultadoAutomato;
 
-	private String tipoResultado = "  Result: Accept ";
+	private String tipoResultado;
 
-	private List<String> listaPalavrasLidasExpressao = new ArrayList<>();
-	private List<String> listaPalavrasAceitasExpressao = new ArrayList<>();
+	private ArrayList<String> listaPalavrasLidasExpressao = new ArrayList<>();
+	private ArrayList<String> listaPalavrasAceitasExpressao = new ArrayList<>();
 
-	private List<String> listaPalavrasResultadoAutomato = new ArrayList<>();
-	private List<String> listaPalavrasAceitasAutomato = new ArrayList<>();
+	private ArrayList<String> listaPalavrasResultadoAutomato = new ArrayList<>();
+	private ArrayList<String> listaPalavrasAceitasAutomato = new ArrayList<>();
 
 	/**
 	 * @param expressaoRegular
@@ -44,6 +44,8 @@ public class EntradaDeDados {
 		this.nomeArquivoEntradaDados = caminhoBase + nomeArquivoEntradaDados;
 		this.nomeArquivoAutomato = nomeArquivoAutomato;
 		this.nomeArquivoResultadoAutomato = caminhoBase + "results" + nomeArquivoAutomato + ".txt";
+
+		tipoResultado = "  Result: Accept ";
 	}
 
 	/**
@@ -146,7 +148,7 @@ public class EntradaDeDados {
 	/**
 	 * @param listaPalavrasLida the listaPalavrasLida to set
 	 */
-	public void setListaPalavrasLidasExpressao(List<String> listaPalavrasLida) {
+	public void setListaPalavrasLidasExpressao(ArrayList<String> listaPalavrasLida) {
 		this.listaPalavrasLidasExpressao = listaPalavrasLida;
 	}
 
@@ -160,7 +162,7 @@ public class EntradaDeDados {
 	/**
 	 * @param listaPalavrasAceitas the listaPalavrasAceitas to set
 	 */
-	public void setListaPalavrasAceitas(List<String> listaPalavrasAceitas) {
+	public void setListaPalavrasAceitas(ArrayList<String> listaPalavrasAceitas) {
 		this.listaPalavrasAceitasExpressao = listaPalavrasAceitas;
 	}
 
@@ -174,7 +176,7 @@ public class EntradaDeDados {
 	/**
 	 * @param listaPalavrasResultado the listaPalavrasResultado to set
 	 */
-	public void setListaPalavrasResultadoAutomato(List<String> listaPalavrasResultado) {
+	public void setListaPalavrasResultadoAutomato(ArrayList<String> listaPalavrasResultado) {
 		this.listaPalavrasResultadoAutomato = listaPalavrasResultado;
 	}
 
@@ -188,13 +190,13 @@ public class EntradaDeDados {
 	/**
 	 * @param listaPalavrasAceitasAutomato the listaPalavrasAceitasAutomato to set
 	 */
-	public void setListaPalavrasAceitasAutomato(List<String> listaPalavrasAceitasAutomato) {
+	public void setListaPalavrasAceitasAutomato(ArrayList<String> listaPalavrasAceitasAutomato) {
 		this.listaPalavrasAceitasAutomato = listaPalavrasAceitasAutomato;
 	}
 
 	public void lerResultadosDoAutomato() {
 
-		List<String> linhas = new ArrayList<>();
+		ArrayList<String> linhas = new ArrayList<>();
 
 		try {
 			Scanner sc = new Scanner(new File(this.nomeArquivoResultadoAutomato));
@@ -211,7 +213,7 @@ public class EntradaDeDados {
 
 	public void lerArquivoDeEntradaDeDados() {
 
-		List<String> linhas = new ArrayList<>();
+		ArrayList<String> linhas = new ArrayList<>();
 
 		try {
 			Scanner sc = new Scanner(new File(this.nomeArquivoEntradaDados));
@@ -263,6 +265,9 @@ public class EntradaDeDados {
 		verificarPalavrasAceitasAutomato();
 		imprimirPalavrasAceitasAutomato();
 
+		System.out.println("Todas as palavras aceitas pelo autômato são aceitas pela expressão (e vice-versa)? "
+				+ todasAsPalavrasSaoAceitasPelaExpressaoEPeloAutomato());
+
 	}
 
 	/**
@@ -277,4 +282,33 @@ public class EntradaDeDados {
 		}
 
 	}
+
+	/**
+	 * Verifica (uma a uma) se todas as palavras aceitas pela expressão são também
+	 * aceitas pelo automato e vice-versa.
+	 * 
+	 * @return
+	 */
+	public boolean todasAsPalavrasSaoAceitasPelaExpressaoEPeloAutomato() {
+
+		boolean palavraExistaNaOutraLista = true;
+
+		while (palavraExistaNaOutraLista) {
+
+			for (String string : listaPalavrasAceitasAutomato) {
+				palavraExistaNaOutraLista = listaPalavrasAceitasExpressao.contains(string);
+			}
+
+			for (String string : listaPalavrasAceitasExpressao) {
+				palavraExistaNaOutraLista = listaPalavrasAceitasAutomato.contains(string);
+			}
+
+			if (palavraExistaNaOutraLista)
+				break;
+
+		}
+
+		return palavraExistaNaOutraLista;
+	}
+
 }

@@ -10,9 +10,19 @@ public class ProgramaPrincipal {
 		System.out.print(object);
 	}
 
-	public static void main(String[] args) {
- 
-			System.out.println( Automato.gerarAutomatoQtdIguais(1).getQuantidadeEstados());
-			 
+	public static void main(String[] args) throws Exception {
+
+//		System.out.println(Automato.calcularQtdEstadosUmEstadoFinalQtdsIguais(5).getQuantidadeEstados());
+
+//		for (int i = 0; i < 10; i++) {
+//			imprimirNaLinha(Automato.calcularQtdEstadosVariosEstadosFinaisQtdsIguais(i).getQuantidadeEstados() + " ");
+//		}
+//		imprimir("");
+//
+//		for (int i = 0; i < 10; i++) {
+//			imprimirNaLinha(i + " ");
+//		}
+
+		imprimir(Automato.calcularQtdEstadosVariosEstadosFinaisQtdsDiferentes(3, 3, 5).getQuantidadeEstados());
 	}
 }

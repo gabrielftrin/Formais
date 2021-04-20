@@ -1,4 +1,4 @@
- package formais;
+package formais;
 
 import java.rmi.UnexpectedException;
 import java.util.ArrayList;
@@ -11,7 +11,6 @@ public class Automato {
 
 	private int quantidadeEstados;
 	private int quantidadeTransicoes;
-
 
 	/**
 	 * 
@@ -52,6 +51,7 @@ public class Automato {
 	/**
 	 * O 'ponto medio' representa uma coluna (quantidade de caracteres lidos) de
 	 * estados que possui a maior quantidade completa de estados
+	 * 
 	 * @deprecated
 	 * @param n
 	 * @return
@@ -172,6 +172,7 @@ public class Automato {
 
 	/**
 	 * Vários estados finais
+	 * 
 	 * @deprecated
 	 * @param n
 	 * @return
@@ -212,8 +213,9 @@ public class Automato {
 			return calcularQtdEstadosVariosEstadosFinaisQtdsIguais(c);
 		}
 
-		// Pega o menor numero
+		// Pega o maior e o menor numero
 		int menorNumero = menorNumero(c, b, s);
+		int maiorNumero = maiorNumero(c, b, s);
 		int totalEstados = 0;
 
 		// Caso 1: Menor = (apenas) um dos outros 2 (e o terceiro é diferente)
@@ -222,9 +224,6 @@ public class Automato {
 			// Calcula quantidade de estado para n = menor
 			totalEstados = calcularQtdEstadosVariosEstadosFinaisQtdsIguais(menorNumero).getQuantidadeEstados();
 
-			// Identificar o maior numero
-			int maiorNumero = maiorNumero(c, b, s);
-
 			// Calcular quantidade de estados
 			totalEstados += (maiorNumero - menorNumero) * ((menorNumero + 1) * (menorNumero + 1));
 
@@ -232,12 +231,21 @@ public class Automato {
 		}
 
 		// Caso 2 - O menor diferente dos outros 2 e estes outros 2 são iguais entre si
-		if (caso == 2) {
-			return null;
+		if (caso == 2) { //TODO só está funcionando para o caso 2
+			
+			// Calcula quantidade de estado para n = menor
+			totalEstados = calcularQtdEstadosVariosEstadosFinaisQtdsIguais(menorNumero).getQuantidadeEstados();
+
+			//Só funciona para o em que o menor é igual a 2 
+			for (int i = menorNumero; i < maiorNumero; i++) {
+				totalEstados += ((i + 1) * 6) + 3;
+			}
+
+			return new Automato(totalEstados);
 		}
 
 		// Caso 3 - Todos são diferentes entre si
-		if (caso == 3) {
+		if (caso == 3) { //TODO fazer o caso 3
 			return null;
 		}
 

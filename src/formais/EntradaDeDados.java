@@ -36,7 +36,7 @@ public class EntradaDeDados {
 	 *                                "entradas_ab.txt"
 	 */
 	public EntradaDeDados(String expressaoRegular, String caminhoBase, String nomeArquivoEntradaDados,
-			String nomeArquivoAutomato, String nomeArquivoResultadoAutomato) {
+			String nomeArquivoAutomato) {
 
 		this.expressaoRegular = expressaoRegular;
 
@@ -271,16 +271,83 @@ public class EntradaDeDados {
 	}
 
 	/**
-	 * TODO Falta implementar
+	 * Cria uma lista com todas as possibildiades de palavras a partir dos 'param'
+	 * informados.
 	 * 
-	 * 
+	 * @param qtdCaracteres Quantidade de caracteres máxima da última palavra
+	 * @param param         Letras ou palavras a serem processadas
+	 * @return Uma lista de todas as palavras
 	 */
-	public void gerarArquivoComPalavras(String... param) {
+	public ArrayList<String> gerarListaDePalavras(int qtdCaracteres, String... param) {
 
-		if (param != null) {
-
+		if (param == null) {
+			return null;
 		}
 
+		// Declarar lista
+		ArrayList<String> listaDePalavrasGeradas = new ArrayList<String>();
+
+		// Preencher lista principal com os unitarios dos simbolos
+		for (String string : param) {
+			listaDePalavrasGeradas.add(string);
+		}
+
+		if (qtdCaracteres > 1) {
+
+			ArrayList<String> listaAux1 = new ArrayList<String>();
+			ArrayList<String> listaAux2 = new ArrayList<String>();
+
+			// Copiar principal para a 2
+			listaAux2.addAll(listaDePalavrasGeradas);
+
+			for (int i = 0; i < qtdCaracteres - 1; i++) {
+
+				// Concatenar param com aux e colocar na aux 1
+				for (String parametro : param) {
+					for (String string : listaAux2) {
+						listaAux1.add(parametro + string);
+					}
+				}
+
+				// Copiar lista aux 1 para o fim da principal
+				for (String string : listaAux1) {
+					listaDePalavrasGeradas.add(string);
+				}
+
+				// Apagar lista aux 2
+				listaAux2.clear();
+
+				// Copiar aux 1 para aux 2
+				listaAux2.addAll(listaAux1);
+
+				// Apagar lista aux 1
+				listaAux1.clear();
+
+			}
+		}
+
+		return listaDePalavrasGeradas;
+	}
+
+	/**
+	 * TODO arquivo
+	 * @return
+	 */
+	public static boolean criarArquivoComPalavrasPossiveis(String caminho) {
+		
+		//validar string caminho 
+
+		//Verificar se já existe um arquivo com esse mesmo nome
+		
+		//new PrintWriter(new FileWriter("C:\\Users\\mrgab\\Google Drive\\5-Formais\\teste.txt")).printf("conteudo").close();
+		
+		//tratar siatuação da palavra vazia
+		
+		//nome do arquivo qual é?
+		
+		
+		
+		return true;
 	}
 
 	/**

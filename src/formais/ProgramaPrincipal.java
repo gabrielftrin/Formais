@@ -12,17 +12,11 @@ public class ProgramaPrincipal {
 
 	public static void main(String[] args) throws Exception {
 
-//		System.out.println(Automato.calcularQtdEstadosUmEstadoFinalQtdsIguais(5).getQuantidadeEstados());
-
-//		for (int i = 0; i < 10; i++) {
-//			imprimirNaLinha(Automato.calcularQtdEstadosVariosEstadosFinaisQtdsIguais(i).getQuantidadeEstados() + " ");
-//		}
-//		imprimir("");
-//
-//		for (int i = 0; i < 10; i++) {
-//			imprimirNaLinha(i + " ");
-//		}
-
-		imprimir(Automato.calcularQtdEstadosVariosEstadosFinaisQtdsDiferentes(3, 3, 5).getQuantidadeEstados());
+//		imprimir(
+//				Automato.calcularQtdEstadosVariosEstadosFinaisQtdsDiferentes(0, 0, 1).getQuantidadeEstados()
+//			);		
+		
+		System.out.println(Automato.calcularQtdEstadosVariosEstadosFinaisQtdsDiferentes(1, 3, 3).getQuantidadeEstados());
+		
 	}
 }
